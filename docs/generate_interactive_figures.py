@@ -71,6 +71,7 @@ df_sisso["norm_formula"] = df_sisso["formula"].apply(normalize_abx3)
 df_crystal["norm_formula"] = df_crystal["formula"].apply(normalize_abx3)
 
 df_crystal_sisso = df_sisso[df_sisso["norm_formula"].isin(df_crystal["norm_formula"])]
+
 df_crystal_sisso_hhi = df_crystal_sisso[
     ["formula", "A", "B", "X", "bandgap", "bandgap_sigma", "t_sisso"]
 ].copy()
@@ -80,6 +81,10 @@ df_crystal_sisso_hhi = df_crystal_sisso_hhi.merge(
 df_crystal_sisso_hhi_cl = df_crystal_sisso_hhi.merge(
     df_CLscore[["formula", "CL score", "CL score std"]], on="formula", how="left"
 )
+
+#Correct formula column (reconstruct from A, B, X) for all three dataframes to ensure consistency
+for df in [df_crystal_sisso, df_crystal_sisso_hhi, df_crystal_sisso_hhi_cl]:
+    df['formula'] = df['A'] + df['B'] + df['X'] + "3"
 
 # ---------------------------------------------------------------------------
 # 2. Figure 3 — colormap_radii (stability heatmap over rA/rB space)
