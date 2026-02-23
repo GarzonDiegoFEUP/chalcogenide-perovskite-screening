@@ -17,9 +17,8 @@ connection to render).
 
 ## Figure 2 — Experimental data distribution of ABX₃ compounds
 
-Distribution of tolerance factors and calibrated stability probability for the
-training + test set of ABX₃ chalcogenide perovskites. Hover over any bar or
-point to inspect the individual compound.
+Distribution of tolerance factors and logistic-calibrated probability P(τ\*) for the
+training + test set of ABX₃ chalcogenide perovskites. 
 
 ### τ* (SISSO-derived) distribution
 
@@ -68,7 +67,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_prob_S.html"
   width="100%"
-  height="560px"
+  height="600px"
   frameborder="0"
   scrolling="no">
 </iframe>
@@ -78,7 +77,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_prob_Se.html"
   width="100%"
-  height="560px"
+  height="600px"
   frameborder="0"
   scrolling="no">
 </iframe>
@@ -91,7 +90,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_tsisso_S.html"
   width="100%"
-  height="560px"
+  height="600px"
   frameborder="0"
   scrolling="no">
 </iframe>
@@ -101,7 +100,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_tsisso_Se.html"
   width="100%"
-  height="560px"
+  height="600px"
   frameborder="0"
   scrolling="no">
 </iframe>
@@ -112,7 +111,7 @@ stability class.
 
 ## Figure 4 — Crystal structures (polyhedral view)
 
-Interactive 3D polyhedral views of the CrystaLLM-predicted perovskite structures.
+Interactive 3D structure CrystaLLM-predicted perovskite structures.
 BX₆ octahedra are rendered as semi-transparent polyhedra. Drag to rotate,
 scroll to zoom, hover atoms for coordinates.
 
