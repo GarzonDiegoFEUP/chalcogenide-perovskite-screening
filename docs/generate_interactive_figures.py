@@ -20,8 +20,8 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from tf_chpvk_pv.config import PROCESSED_DATA_DIR, RESULTS_DIR
-from tf_chpvk_pv.plots import (
+from chalcogenide_perovskite_screening.config import PROCESSED_DATA_DIR, RESULTS_DIR
+from chalcogenide_perovskite_screening.plots import (
     colormap_radii_interactive,
     plot_matrix_interactive,
     pareto_front_interactive,

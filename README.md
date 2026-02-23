@@ -148,7 +148,7 @@ The analysis is organized as a sequential pipeline. Run notebooks in order:
 │
 ├── references/              <- Data dictionaries, manuals, explanatory materials
 │
-└── chalcogenide-perovskite-screening/             <- Source code (Python package)
+└── chalcogenide_perovskite_screening/  <- Source code (Python package)
     ├── __init__.py
     ├── config.py            <- Path configuration and constants
     ├── dataset.py           <- Data loading, cleaning, composition generation

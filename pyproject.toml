@@ -3,7 +3,7 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "tf_chpvk_pv"
+name = "chalcogenide-perovskite-screening"
 version = "1.0.0"
 description = "ML-guided screening of chalcogenide perovskites as solar energy materials"
 authors = [
@@ -89,5 +89,5 @@ exclude = [".git", "notebooks", "references", "models", "data"]
 ignore = ["E731", "E501", "C901"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["tf_chpvk_pv"]
+known-first-party = ["chalcogenide_perovskite_screening"]
 force-sort-within-sections = true

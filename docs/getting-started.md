@@ -101,7 +101,7 @@ chalcogenide-perovskite-screening/
 │   ├── crystaLLM/           # CrystaLLM-generated CIF files
 │   └── sustainability_data/ # ESG, HHI, earth abundance data
 ├── notebooks/               # Jupyter analysis notebooks (numbered)
-├── tf_chpvk_pv/             # Python package
+├── chalcogenide_perovskite_screening/  # Python package
 │   ├── config.py            # Path configuration and constants
 │   ├── dataset.py           # Data loading and processing
 │   ├── features.py          # SISSO feature engineering
