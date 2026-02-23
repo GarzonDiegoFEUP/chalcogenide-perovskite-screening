@@ -55,7 +55,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh   # macOS / Linux
 # or: brew install uv
 
 # Clone and install
-git clone https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV.git
+git clone https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening.git
 cd TF-ChPVK-PV
 uv sync --extra dev --extra notebooks   # creates .venv, resolves & installs everything
 ```
@@ -148,7 +148,7 @@ The analysis is organized as a sequential pipeline. Run notebooks in order:
 │
 ├── references/              <- Data dictionaries, manuals, explanatory materials
 │
-└── tf_chpvk_pv/             <- Source code (Python package)
+└── chalcogenide-perovskite-screening/             <- Source code (Python package)
     ├── __init__.py
     ├── config.py            <- Path configuration and constants
     ├── dataset.py           <- Data loading, cleaning, composition generation
@@ -196,7 +196,7 @@ If you use this software or data, please cite it using the metadata in [`CITATIO
 @software{garzon2026tfchpvkpv,
   author  = {Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
              and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
-  title   = {{TF-ChPVK-PV}},
+  title   = {{chalcogenide-perovskite-screening}},
   version = {1.0.0},
   year    = {2026},
   doi     = {10.5281/zenodo.18701743},
