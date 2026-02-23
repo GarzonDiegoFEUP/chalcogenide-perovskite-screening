@@ -4,7 +4,7 @@
 
 [![Python 3.8.2](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](CITATION.cff)
+[![Version](https://img.shields.io/badge/version-1.0.1-green.svg)](CITATION.cff)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18701742.svg)](https://doi.org/10.5281/zenodo.18701742)
 
 This repository contains the datasets, analysis notebooks, and source code for the paper:
