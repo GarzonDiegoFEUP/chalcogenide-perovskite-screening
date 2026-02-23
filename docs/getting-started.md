@@ -81,10 +81,10 @@ SISSO features are pre-cached in `data/interim/features_sisso.csv`. If you need 
 Register the virtual environment as a Jupyter kernel:
 
 ```bash
-uv run python -m ipykernel install --user --name tf-chpvk --display-name "Python (TF-ChPVK)"
+uv run python -m ipykernel install --user --name chalc-pvk-sc --display-name "Python (chalc-pvk-sc)"
 ```
 
-Then select the **Python (TF-ChPVK)** kernel when opening notebooks in VS Code or Jupyter Lab.
+Then select the **Python (chalc-pvk-sc)** kernel when opening notebooks in VS Code or Jupyter Lab.
 
 ## Next Steps
 

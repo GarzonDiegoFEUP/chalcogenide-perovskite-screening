@@ -100,7 +100,7 @@ MP_API_KEY=your_materials_project_api_key
 After installation, select the `.venv` kernel in VS Code (or register it manually):
 
 ```bash
-uv run python -m ipykernel install --user --name tf-chpvk --display-name "Python (TF-ChPVK)"
+uv run python -m ipykernel install --user --name chalc-pvk-sc --display-name "Python (chalc-pvk-sc)"
 ```
 
 ## Pipeline Notebooks

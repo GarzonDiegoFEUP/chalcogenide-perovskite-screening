@@ -1807,7 +1807,7 @@ wheels = [
 ]
 
 [[package]]
-name = "tf-chpvk-pv"
+name = "chalcogenide-perovskite-screening"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [

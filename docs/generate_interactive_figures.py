@@ -1,4 +1,4 @@
-"""Generate interactive Plotly HTML figures for the TF-ChPVK-PV documentation.
+"""Generate interactive Plotly HTML figures for the chalcogenide-perovskite-screening documentation.
 
 Run from the repository root (or any directory) with:
 

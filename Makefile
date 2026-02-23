@@ -2,8 +2,8 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = tf-chpvk-pv
-PYTHON_VERSION = 3.10
+PROJECT_NAME = chalcogenide-perovskite-screening
+PYTHON_VERSION = 3.8.20
 PYTHON_INTERPRETER = python
 
 #################################################################################
