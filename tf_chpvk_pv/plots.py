@@ -1981,5 +1981,253 @@ def corr_matrix_interactive(df: pd.DataFrame, metrics: List[str], dict_labels: D
     return fig
 
 
+# ---------------------------------------------------------------------------
+# Crystal structure helpers
+# ---------------------------------------------------------------------------
+
+_CHALCOGENS = {'S', 'Se', 'Te'}
+
+# CPK-inspired colors for elements common in this dataset
+_ELEMENT_COLORS: Dict[str, str] = {
+    # Anions
+    'S':  '#f5c542', 'Se': '#e89b3a',
+    # Common A-site
+    'Ba': '#1abc9c', 'Sr': '#16a085', 'Ca': '#148f77',
+    'Eu': '#2ecc71', 'Yb': '#27ae60', 'Sm': '#1e8449',
+    'La': '#52be80', 'Ce': '#45b39d', 'Pr': '#a9cce3',
+    'Gd': '#76d7c4', 'Dy': '#5dade2', 'Tb': '#85c1e9',
+    # Common B-site
+    'Zr': '#4c7be1', 'Hf': '#2e4db9', 'Ti': '#5b8dd9',
+    'Sc': '#7fb3f5', 'In': '#6c9ee0', 'Sn': '#8daee8',
+    'U':  '#9b59b6', 'Bi': '#8e44ad',
+    'Zn': '#aab7b8', 'Cu': '#ca6f1e', 'Cd': '#b7950b',
+    'Lu': '#717d7e', 'Tm': '#839192', 'Al': '#abebc6',
+}
+_DEFAULT_COLOR = '#cccccc'
+
+
+def _site_roles(structure: Any) -> tuple:
+    """Return (role_by_index, a_element, b_element, x_element) for a perovskite structure.
+
+    X-sites are chalcogens (S/Se/Te). B (octahedral) and A (cuboctahedral) are
+    distinguished by their average nearest-neighbor distance to X: the cation with
+    the shorter average B–X distance is assigned to the B-site.
+
+    Args:
+        structure: :class:`pymatgen.core.Structure` object.
+
+    Returns:
+        tuple: (role_map, a_el, b_el, x_el) where role_map is a dict
+            ``{site_index: 'A'|'B'|'X'}``.
+    """
+    from scipy.spatial.distance import cdist
+
+    x_idx = [i for i, s in enumerate(structure) if s.species_string in _CHALCOGENS]
+    cat_idx = [i for i, s in enumerate(structure) if s.species_string not in _CHALCOGENS]
+
+    x_coords = np.array([structure[i].coords for i in x_idx])
+    cation_els = list({structure[i].species_string for i in cat_idx})
+
+    if len(cation_els) == 1:
+        role_map = {i: 'X' for i in x_idx}
+        role_map.update({i: 'B' for i in cat_idx})
+        return role_map, cation_els[0], cation_els[0], structure[x_idx[0]].species_string
+
+    # Shorter mean nearest-X distance → B-site
+    avg_dist: Dict[str, float] = {}
+    for el in cation_els:
+        el_coords = np.array([structure[i].coords for i in cat_idx
+                               if structure[i].species_string == el])
+        d = cdist(el_coords, x_coords)
+        avg_dist[el] = float(d.min(axis=1).mean())
+
+    b_el = min(avg_dist, key=avg_dist.get)
+    a_el = next(el for el in cation_els if el != b_el)
+    x_el = structure[x_idx[0]].species_string
+
+    role_map: Dict[int, str] = {}
+    for i in x_idx:
+        role_map[i] = 'X'
+    for i in cat_idx:
+        role_map[i] = 'B' if structure[i].species_string == b_el else 'A'
+
+    return role_map, a_el, b_el, x_el
+
+
+def plot_crystal_structure_interactive(
+    cif_path: Any,
+    supercell: tuple = (1, 1, 1),
+    alpha: float = 0.35,
+    bx_cutoff: float = 4.0,
+) -> Any:
+    """Create an interactive 3D polyhedral view of a perovskite crystal structure.
+
+    Reads a CIF file with pymatgen, identifies A/B/X sites, draws BX₆ octahedra
+    as semi-transparent Plotly ``Mesh3d`` traces, and overlays atom spheres with
+    hover labels.  The unit-cell box is drawn as a black wire frame.
+
+    Args:
+        cif_path: Path to the CIF file.
+        supercell: Supercell dimensions as ``(na, nb, nc)``. Default ``(1, 1, 1)``
+            (the as-read unit cell, which contains Z = 4 formula units for Pnma).
+        alpha: Opacity of the polyhedral faces (0 = transparent, 1 = opaque).
+        bx_cutoff: Neighbor search radius (Å) used to find X-site atoms around
+            each B-site atom for constructing octahedral polyhedra.
+
+    Returns:
+        plotly.graph_objects.Figure: Interactive crystal structure figure.
+    """
+    import plotly.graph_objects as go
+    from pymatgen.core import Structure
+    from scipy.spatial import ConvexHull
+
+    structure = Structure.from_file(str(cif_path))
+    if list(supercell) != [1, 1, 1]:
+        structure.make_supercell(list(supercell))
+
+    role_map, a_el, b_el, x_el = _site_roles(structure)
+
+    # -------------------------------------------------------------------------
+    # Polyhedral traces — one Mesh3d per B atom (BX₆ octahedron)
+    # -------------------------------------------------------------------------
+    b_indices = [i for i, r in role_map.items() if r == 'B']
+
+    # Use pymatgen periodic neighbor search so atoms at cell boundaries are correct
+    all_neighbors = structure.get_all_neighbors(r=bx_cutoff)
+
+    poly_vx: List[float] = []
+    poly_vy: List[float] = []
+    poly_vz: List[float] = []
+    poly_fi: List[int] = []
+    poly_fj: List[int] = []
+    poly_fk: List[int] = []
+    vertex_offset = 0
+
+    for bi in b_indices:
+        x_neighbors = [
+            n for n in all_neighbors[bi]
+            if n.species_string in _CHALCOGENS
+        ]
+        # Sort by distance, keep 6 nearest
+        x_neighbors.sort(key=lambda n: n.nn_distance)
+        verts = np.array([n.coords for n in x_neighbors[:6]])
+
+        if len(verts) < 4:
+            continue
+        try:
+            hull = ConvexHull(verts)
+            poly_vx.extend(verts[:, 0])
+            poly_vy.extend(verts[:, 1])
+            poly_vz.extend(verts[:, 2])
+            for simplex in hull.simplices:
+                poly_fi.append(vertex_offset + int(simplex[0]))
+                poly_fj.append(vertex_offset + int(simplex[1]))
+                poly_fk.append(vertex_offset + int(simplex[2]))
+            vertex_offset += len(verts)
+        except Exception:
+            pass
+
+    traces: List[Any] = []
+
+    b_color = _ELEMENT_COLORS.get(b_el, _DEFAULT_COLOR)
+    if poly_vx:
+        traces.append(go.Mesh3d(
+            x=poly_vx, y=poly_vy, z=poly_vz,
+            i=poly_fi, j=poly_fj, k=poly_fk,
+            color=b_color,
+            opacity=alpha,
+            name=f'{b_el}X₆ octahedra',
+            hoverinfo='skip',
+            showlegend=True,
+            flatshading=False,
+            lighting=dict(ambient=0.7, diffuse=0.8, specular=0.3, roughness=0.5),
+            lightposition=dict(x=100, y=200, z=100),
+        ))
+
+    # -------------------------------------------------------------------------
+    # Atom sphere traces — one Scatter3d per element
+    # -------------------------------------------------------------------------
+    marker_sizes = {a_el: 12, b_el: 8, x_el: 6}
+    for el, role in [(a_el, 'A'), (b_el, 'B'), (x_el, 'X')]:
+        idx = [i for i, r in role_map.items() if r == role]
+        if not idx:
+            continue
+        coords = np.array([structure[i].coords for i in idx])
+        color = _ELEMENT_COLORS.get(el, _DEFAULT_COLOR)
+        traces.append(go.Scatter3d(
+            x=coords[:, 0], y=coords[:, 1], z=coords[:, 2],
+            mode='markers',
+            marker=dict(
+                size=marker_sizes.get(el, 8),
+                color=color,
+                line=dict(color='black', width=0.5),
+            ),
+            name=f'{el} ({role}-site)',
+            hovertemplate=(
+                f'<b>{el} ({role}-site)</b><br>'
+                'x = %{x:.2f} Å<br>y = %{y:.2f} Å<br>z = %{z:.2f} Å'
+                '<extra></extra>'
+            ),
+        ))
+
+    # -------------------------------------------------------------------------
+    # Unit-cell wire frame (12 edges of the parallelepiped)
+    # -------------------------------------------------------------------------
+    latt = structure.lattice.matrix  # rows are a, b, c vectors
+    o = np.zeros(3)
+    av, bv, cv = latt[0], latt[1], latt[2]
+    corners = [
+        o, av, bv, cv,
+        av + bv, av + cv, bv + cv, av + bv + cv,
+    ]
+    edges = [
+        (0, 1), (0, 2), (0, 3),
+        (1, 4), (1, 5),
+        (2, 4), (2, 6),
+        (3, 5), (3, 6),
+        (4, 7), (5, 7), (6, 7),
+    ]
+    ex: List[Optional[float]] = []
+    ey: List[Optional[float]] = []
+    ez: List[Optional[float]] = []
+    for e0, e1 in edges:
+        ex += [float(corners[e0][0]), float(corners[e1][0]), None]
+        ey += [float(corners[e0][1]), float(corners[e1][1]), None]
+        ez += [float(corners[e0][2]), float(corners[e1][2]), None]
+
+    traces.append(go.Scatter3d(
+        x=ex, y=ey, z=ez,
+        mode='lines',
+        line=dict(color='black', width=2),
+        name='Unit cell',
+        hoverinfo='skip',
+    ))
+
+    # -------------------------------------------------------------------------
+    # Layout
+    # -------------------------------------------------------------------------
+    formula = structure.composition.reduced_formula
+    sc_label = '×'.join(str(s) for s in supercell)
+    fig = go.Figure(data=traces)
+    fig.update_layout(
+        title=f'{formula} — polyhedral view ({sc_label} supercell)',
+        scene=dict(
+            xaxis=dict(showbackground=False, showticklabels=False,
+                       showgrid=False, zeroline=False, title=''),
+            yaxis=dict(showbackground=False, showticklabels=False,
+                       showgrid=False, zeroline=False, title=''),
+            zaxis=dict(showbackground=False, showticklabels=False,
+                       showgrid=False, zeroline=False, title=''),
+            aspectmode='data',
+            bgcolor='white',
+        ),
+        template='plotly_white',
+        height=600,
+        legend=dict(x=0.01, y=0.99, bgcolor='rgba(255,255,255,0.7)'),
+        margin=dict(l=0, r=0, t=50, b=0),
+    )
+    return fig
+
+
 if __name__ == "__main__":
     app()
