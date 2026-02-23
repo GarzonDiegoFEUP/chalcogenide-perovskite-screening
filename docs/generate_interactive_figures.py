@@ -28,6 +28,9 @@ from tf_chpvk_pv.plots import (
     pareto_front_interactive,
     corr_matrix_interactive,
     normalize_abx3,
+    plot_tau_star_histogram_interactive,
+    plot_t_star_histogram_interactive,
+    plot_t_star_vs_p_t_sisso_interactive,
 )
 
 OUTPUT_DIR = (Path(__file__).parent / "assets" / "figures").resolve()
@@ -85,9 +88,29 @@ df_crystal_sisso_hhi_cl = df_crystal_sisso_hhi.merge(
 #Correct formula column (reconstruct from A, B, X) for all three dataframes to ensure consistency
 for df in [df_crystal_sisso, df_crystal_sisso_hhi, df_crystal_sisso_hhi_cl]:
     df['formula'] = df['A'] + df['B'] + df['X'] + "3"
+    df.loc[df['formula'].str.contains("Cu"), 'formula'] = 'Cu' + df.loc[df['formula'].str.contains("Cu"), 'formula'].str.replace("Cu", "")
 
 # ---------------------------------------------------------------------------
-# 2. Figure 3 — colormap_radii (stability heatmap over rA/rB space)
+# 2. Figure 2 — data distribution (tau*/t* histograms and t* vs P(tau*))
+# ---------------------------------------------------------------------------
+print("\n[Fig 2] Loading concat dataset for distribution plots …")
+df_fig2 = pd.read_csv(RESULTS_DIR / "processed_chpvk_concat_dataset.csv")
+df_fig2.rename(columns={"t_jess": "t*", "t_sisso": "tau*", "p_t_sisso": "p_tau*"}, inplace=True)
+
+print("[Fig 2a] tau* histogram …")
+fig = plot_tau_star_histogram_interactive(threshold=0.846, df=df_fig2)
+_save(fig, "tau_star_histogram.html")
+
+print("[Fig 2b] t* (Jess et al.) histogram …")
+fig = plot_t_star_histogram_interactive(thresholds=[0.84, 1.02], df=df_fig2)
+_save(fig, "t_star_histogram.html")
+
+print("[Fig 2c] t* vs P(tau*) scatter …")
+fig = plot_t_star_vs_p_t_sisso_interactive(df=df_fig2, thresholds=[0.84, 1.02])
+_save(fig, "t_star_vs_p_tau_star.html")
+
+# ---------------------------------------------------------------------------
+# 3. Figure 3 — colormap_radii (stability heatmap over rA/rB space)
 # ---------------------------------------------------------------------------
 print("\n[Fig 3] Colormap radii (P(τ*)) …")
 for anion in ["S", "Se"]:

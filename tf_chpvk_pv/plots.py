@@ -458,6 +458,73 @@ def plot_tau_star_histogram(threshold: float, df: pd.DataFrame) -> None:
 
     plt.show()
 
+
+def plot_tau_star_histogram_interactive(threshold: float, df: pd.DataFrame) -> Any:
+    """Create interactive histogram of tau* tolerance factor values by stability class.
+
+    Interactive Plotly version of :func:`plot_tau_star_histogram`. Generates a
+    grouped bar histogram showing the distribution of tau* (τ*) values colored
+    by perovskite/nonperovskite classification, with the stability threshold
+    region highlighted.
+
+    Args:
+        threshold: Tau* threshold value for stable perovskite classification.
+        df: DataFrame containing 'tau*' and 'exp_label' columns.
+
+    Returns:
+        plotly.graph_objects.Figure: Interactive histogram figure.
+    """
+    import plotly.graph_objects as go
+
+    df_ = df.copy()
+    df_['exp_label_'] = df_['exp_label'].map({1: 'Perovskite', 0: 'Nonperovskite'})
+
+    colors = {'Perovskite': '#1f77b4', 'Nonperovskite': '#ff7f0e'}
+
+    fig = go.Figure()
+
+    for label in ['Perovskite', 'Nonperovskite']:
+        subset = df_[df_['exp_label_'] == label]
+        fig.add_trace(go.Histogram(
+            x=subset['tau*'],
+            name=label,
+            nbinsx=25,
+            marker_color=colors[label],
+            opacity=0.8,
+        ))
+
+    # Green shaded region [0, threshold]
+    fig.add_shape(
+        type='rect',
+        xref='x', yref='paper',
+        x0=0, x1=threshold,
+        y0=0, y1=1,
+        fillcolor='limegreen',
+        opacity=0.25,
+        line_width=0,
+        layer='below',
+    )
+
+    # Vertical threshold line
+    fig.add_shape(
+        type='line',
+        xref='x', yref='paper',
+        x0=threshold, x1=threshold,
+        y0=0, y1=1,
+        line=dict(color='black', width=2),
+    )
+
+    fig.update_layout(
+        barmode='group',
+        xaxis=dict(title='SISSO-derived τ*', range=[0, 1.6]),
+        yaxis=dict(title='Counts'),
+        template='plotly_white',
+        legend=dict(title=None),
+    )
+
+    return fig
+
+
 def plot_t_star_histogram(thresholds: List[float], df: pd.DataFrame) -> None:
     """Create histogram of t* (Jess et al.) tolerance factor values by stability class.
 
@@ -505,6 +572,74 @@ def plot_t_star_histogram(thresholds: List[float], df: pd.DataFrame) -> None:
     plt.savefig(FIGURES_DIR / 't_star_histogram.png', dpi=600, bbox_inches='tight')
 
     plt.show()
+
+
+def plot_t_star_histogram_interactive(thresholds: List[float], df: pd.DataFrame) -> Any:
+    """Create interactive histogram of t* (Jess et al.) tolerance factor values by stability class.
+
+    Interactive Plotly version of :func:`plot_t_star_histogram`. Generates a
+    grouped bar histogram showing the distribution of t* values with
+    perovskite/nonperovskite classification, highlighting the two-threshold
+    stability region.
+
+    Args:
+        thresholds: List of two threshold values [lower, upper] defining stable region.
+        df: DataFrame containing 't*' and 'exp_label' columns.
+
+    Returns:
+        plotly.graph_objects.Figure: Interactive histogram figure.
+    """
+    import plotly.graph_objects as go
+
+    df_ = df.copy()
+    df_['exp_label_'] = df_['exp_label'].map({1: 'Perovskite', 0: 'Nonperovskite'})
+
+    colors = {'Perovskite': '#1f77b4', 'Nonperovskite': '#ff7f0e'}
+
+    fig = go.Figure()
+
+    for label in ['Perovskite', 'Nonperovskite']:
+        subset = df_[df_['exp_label_'] == label]
+        fig.add_trace(go.Histogram(
+            x=subset['t*'],
+            name=label,
+            nbinsx=25,
+            marker_color=colors[label],
+            opacity=0.8,
+        ))
+
+    # Green shaded region between the two thresholds
+    fig.add_shape(
+        type='rect',
+        xref='x', yref='paper',
+        x0=thresholds[0], x1=thresholds[1],
+        y0=0, y1=1,
+        fillcolor='limegreen',
+        opacity=0.25,
+        line_width=0,
+        layer='below',
+    )
+
+    # Vertical threshold lines
+    for thr in thresholds:
+        fig.add_shape(
+            type='line',
+            xref='x', yref='paper',
+            x0=thr, x1=thr,
+            y0=0, y1=1,
+            line=dict(color='black', width=2),
+        )
+
+    fig.update_layout(
+        barmode='group',
+        xaxis=dict(title='Jess et al. tolerance factor (t<sub>Jess</sub>)', range=[0.3, 2.2]),
+        yaxis=dict(title='Counts'),
+        template='plotly_white',
+        legend=dict(title=None),
+    )
+
+    return fig
+
 
 def plot_t_star_vs_p_t_sisso(df: pd.DataFrame, thresholds: List[float]) -> None:
     """Create scatter plot of t* vs P(τ*) with stability regions.
@@ -556,6 +691,87 @@ def plot_t_star_vs_p_t_sisso(df: pd.DataFrame, thresholds: List[float]) -> None:
     plt.savefig(FIGURES_DIR / 'P_tau_t_star_scatter.png', dpi=600, bbox_inches='tight')
 
     plt.show()
+
+
+def plot_t_star_vs_p_t_sisso_interactive(df: pd.DataFrame, thresholds: List[float]) -> Any:
+    """Create interactive scatter plot of t* vs P(τ*) with stability regions.
+
+    Interactive Plotly version of :func:`plot_t_star_vs_p_t_sisso`. Visualizes
+    the relationship between the Jess et al. tolerance factor (t*) and the
+    calibrated probability P(τ*), with vertical lines marking the stability
+    threshold region and hover text for each compound.
+
+    Args:
+        df: DataFrame containing 't*', 'p_tau*', and 'exp_label' columns.
+        thresholds: List of two threshold values [lower, upper] for t* stability region.
+
+    Returns:
+        plotly.graph_objects.Figure: Interactive scatter figure.
+    """
+    import plotly.graph_objects as go
+
+    df_plot = df.copy()
+    df_plot['exp_label_'] = df_plot['exp_label'].map({1: 'Perovskite', 0: 'Nonperovskite'})
+
+    marker_styles = {
+        'Perovskite':    dict(symbol='circle', color='#1f77b4', size=9, opacity=1.0,
+                              line=dict(color='#1f77b4', width=1)),
+        'Nonperovskite': dict(symbol='x',      color='#ff7f0e', size=9, opacity=1.0,
+                              line=dict(color='#ff7f0e', width=1)),
+    }
+
+    fig = go.Figure()
+
+    for label in ['Perovskite', 'Nonperovskite']:
+        subset = df_plot[df_plot['exp_label_'] == label]
+        hover = (
+            subset['formula'].apply(lambda f: f'<b>{f}</b><br>')
+            if 'formula' in subset.columns
+            else pd.Series([''] * len(subset), index=subset.index)
+        )
+        hover = hover + subset['t*'].apply(lambda v: f't<sub>Jess</sub> = {v:.3f}<br>')
+        hover = hover + subset['p_tau*'].apply(lambda v: f'P(τ*) = {v:.3f}')
+        fig.add_trace(go.Scatter(
+            x=subset['t*'],
+            y=subset['p_tau*'],
+            mode='markers',
+            name=label,
+            marker=marker_styles[label],
+            hovertext=hover,
+            hoverinfo='text',
+        ))
+
+    # Green shaded region between the two thresholds
+    fig.add_shape(
+        type='rect',
+        xref='x', yref='paper',
+        x0=thresholds[0], x1=thresholds[1],
+        y0=0, y1=1,
+        fillcolor='limegreen',
+        opacity=0.25,
+        line_width=0,
+        layer='below',
+    )
+
+    # Vertical threshold lines
+    for thr in thresholds:
+        fig.add_shape(
+            type='line',
+            xref='x', yref='paper',
+            x0=thr, x1=thr,
+            y0=0, y1=1,
+            line=dict(color='black', width=2),
+        )
+
+    fig.update_layout(
+        xaxis=dict(title='Jess et al. tolerance factor (t<sub>Jess</sub>)', range=[0.3, 2.2]),
+        yaxis=dict(title='P(τ*)'),
+        template='plotly_white',
+        legend=dict(title=None, x=1.0, xanchor='right', y=1.0),
+    )
+
+    return fig
+
 
 def colormap_radii(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba: Optional[Any] = None, t_sisso: bool = False) -> None:
     """Create 2D colormap of stability predictions vs ionic radii for S and Se anions.
