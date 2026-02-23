@@ -56,7 +56,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh   # macOS / Linux
 
 # Clone and install
 git clone https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening.git
-cd TF-ChPVK-PV
+cd chalcogenide-perovskite-screening
 uv sync --extra dev --extra notebooks   # creates .venv, resolves & installs everything
 ```
 
