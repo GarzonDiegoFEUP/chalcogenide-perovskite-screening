@@ -11,14 +11,16 @@ nav:
   - Pipeline: pipeline.md
   - Raw Data Sources: raw-data.md
   - Sustainability Data Sources: sustainability-data.md
-  - References & Citation: references.md
   - Interactive Figures: interactive-figures.md
+  - References & Citation: references.md
 
 plugins:
   - search
 
 theme:
   name: material
+  logo: assets/octah.png
+  favicon: assets/octah.png
   palette:
     primary: teal
     accent: deep orange
