@@ -45,11 +45,11 @@ keywords:
 license: MIT
 version: 1.0.0
 date-released: '2026-02-19'
-doi: 10.5281/zenodo.18701743
+doi: 10.5281/zenodo.18701742
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.18701743
-    description: Zenodo archive (v1.0.0)
+    value: 10.5281/zenodo.18701742
+    description: Zenodo archive (v1.0.1)
 funding:
   - name: >-
       Fundação para a Ciência e Tecnologia, I.P. (FCT)
