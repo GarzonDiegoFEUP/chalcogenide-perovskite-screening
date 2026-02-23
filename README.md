@@ -5,7 +5,7 @@
 [![Python 3.8.2](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](CITATION.cff)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18701743.svg)](https://doi.org/10.5281/zenodo.18701743)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18701742.svg)](https://doi.org/10.5281/zenodo.18701742)
 
 This repository contains the datasets, analysis notebooks, and source code for the paper:
 
@@ -193,14 +193,14 @@ Key methods and data sources used in this pipeline:
 If you use this software or data, please cite it using the metadata in [`CITATION.cff`](CITATION.cff):
 
 ```bibtex
-@software{garzon2026tfchpvkpv,
+@software{garzon2026chalc_screening,
   author  = {Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
              and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
   title   = {{chalcogenide-perovskite-screening}},
-  version = {1.0.0},
+  version = {1.0.1},
   year    = {2026},
-  doi     = {10.5281/zenodo.18701743},
-  url     = {https://doi.org/10.5281/zenodo.18701743},
+  doi     = {10.5281/zenodo.18743650},
+  url     = {https://doi.org/10.5281/zenodo.18743650},
   license = {MIT},
 }
 ```
