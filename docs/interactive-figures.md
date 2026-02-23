@@ -15,6 +15,47 @@ connection to render).
 
 ---
 
+## Figure 2 — Experimental data distribution of ABX₃ compounds
+
+Distribution of tolerance factors and calibrated stability probability for the
+training + test set of ABX₃ chalcogenide perovskites. Hover over any bar or
+point to inspect the individual compound.
+
+### τ* (SISSO-derived) distribution
+
+<iframe
+  src="../assets/figures/tau_star_histogram.html"
+  width="100%"
+  height="500px"
+  frameborder="0"
+  scrolling="no">
+</iframe>
+
+### t\* (Jess et al.) distribution
+
+<iframe
+  src="../assets/figures/t_star_histogram.html"
+  width="100%"
+  height="500px"
+  frameborder="0"
+  scrolling="no">
+</iframe>
+
+### t\* vs P(τ\*)
+
+Calibrated probability P(τ\*) as a function of the Jess et al. tolerance factor.
+The green band marks the stable region (0.84 ≤ t\* ≤ 1.02).
+
+<iframe
+  src="../assets/figures/t_star_vs_p_tau_star.html"
+  width="100%"
+  height="500px"
+  frameborder="0"
+  scrolling="no">
+</iframe>
+
+---
+
 ## Figure 3 — τ* stability over ionic-radii space
 
 Logistic-calibrated probability P(τ\*) of perovskite-type structural stability
@@ -66,6 +107,85 @@ stability class.
 </iframe>
 
 </details>
+
+---
+
+## Figure 4 — Crystal structures (polyhedral view)
+
+Interactive 3D polyhedral views of the CrystaLLM-predicted perovskite structures.
+BX₆ octahedra are rendered as semi-transparent polyhedra. Drag to rotate,
+scroll to zoom, hover atoms for coordinates.
+
+Select a compound from the dropdown to load its structure:
+
+<div style="margin-bottom: 0.5em;">
+  <select id="struct-select" onchange="document.getElementById('struct-frame').src = '../assets/figures/structures/' + this.value + '.html';"
+    style="font-size:1em; padding:4px 8px;">
+    <option value="AlSnSe3_1">AlSnSe3</option>
+    <option value="BaCeS3_1">BaCeS3</option>
+    <option value="BaHfS3_1">BaHfS3</option>
+    <option value="BaPrS3_1">BaPrS3</option>
+    <option value="BaUS3_1">BaUS3</option>
+    <option value="BaUSe3_1">BaUSe3</option>
+    <option value="BaZrS3_1" selected>BaZrS3</option>
+    <option value="CaCeS3_1">CaCeS3</option>
+    <option value="CaUSe3_1">CaUSe3</option>
+    <option value="CeCdS3_1">CeCdS3</option>
+    <option value="CeScS3_1">CeScS3</option>
+    <option value="CeUS3_1">CeUS3</option>
+    <option value="CeUSe3_1">CeUSe3</option>
+    <option value="DyInS3_1">DyInS3</option>
+    <option value="DyScS3_1">DyScS3</option>
+    <option value="DyZrS3_1">DyZrS3</option>
+    <option value="EuDyS3_1">EuDyS3</option>
+    <option value="EuHfS3_1">EuHfS3</option>
+    <option value="EuScS3_1">EuScS3</option>
+    <option value="EuTmS3_1">EuTmS3</option>
+    <option value="EuUS3_1">EuUS3</option>
+    <option value="EuUSe3_1">EuUSe3</option>
+    <option value="EuYS3_1">EuYS3</option>
+    <option value="EuZrS3_1">EuZrS3</option>
+    <option value="GdScS3_1">GdScS3</option>
+    <option value="GdZrS3_1">GdZrS3</option>
+    <option value="HfCuS3_1">HfCuS3</option>
+    <option value="HfCuSe3_1">HfCuSe3</option>
+    <option value="LaScS3_1">LaScS3</option>
+    <option value="LaTbS3_1">LaTbS3</option>
+    <option value="LaTbSe3_1">LaTbSe3</option>
+    <option value="LaZrS3_1">LaZrS3</option>
+    <option value="PrScS3_1">PrScS3</option>
+    <option value="PrUSe3_1">PrUSe3</option>
+    <option value="ScUS3_1">ScUS3</option>
+    <option value="SmLuS3_1">SmLuS3</option>
+    <option value="SmScS3_1">SmScS3</option>
+    <option value="SmUSe3_1">SmUSe3</option>
+    <option value="SmZrS3_1">SmZrS3</option>
+    <option value="SrCeS3_1">SrCeS3</option>
+    <option value="SrPrS3_1">SrPrS3</option>
+    <option value="SrSnS3_1">SrSnS3</option>
+    <option value="SrUS3_1">SrUS3</option>
+    <option value="SrUSe3_1">SrUSe3</option>
+    <option value="TbEuS3_1">TbEuS3</option>
+    <option value="TbScS3_1">TbScS3</option>
+    <option value="TbZnS3_1">TbZnS3</option>
+    <option value="UBiS3_1">UBiS3</option>
+    <option value="UInS3_1">UInS3</option>
+    <option value="UInSe3_1">UInSe3</option>
+    <option value="YbEuS3_1">YbEuS3</option>
+    <option value="YbEuSe3_1">YbEuSe3</option>
+    <option value="YbSmS3_1">YbSmS3</option>
+    <option value="ZrCuSe3_1">ZrCuSe3</option>
+  </select>
+</div>
+
+<iframe
+  id="struct-frame"
+  src="../assets/figures/structures/BaZrS3_1.html"
+  width="100%"
+  height="640px"
+  frameborder="0"
+  scrolling="no">
+</iframe>
 
 ---
 

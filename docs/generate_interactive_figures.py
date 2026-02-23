@@ -13,13 +13,12 @@ fully self-contained files, ~3 MB each).
 """
 
 from pathlib import Path
+import pandas as pd
 import sys
 
 # Ensure the package is importable when running the script directly
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-
-import pandas as pd
 
 from tf_chpvk_pv.config import PROCESSED_DATA_DIR, RESULTS_DIR
 from tf_chpvk_pv.plots import (
@@ -31,6 +30,7 @@ from tf_chpvk_pv.plots import (
     plot_tau_star_histogram_interactive,
     plot_t_star_histogram_interactive,
     plot_t_star_vs_p_t_sisso_interactive,
+    plot_crystal_structure_interactive,
 )
 
 OUTPUT_DIR = (Path(__file__).parent / "assets" / "figures").resolve()
@@ -90,6 +90,18 @@ for df in [df_crystal_sisso, df_crystal_sisso_hhi, df_crystal_sisso_hhi_cl]:
     df['formula'] = df['A'] + df['B'] + df['X'] + "3"
     df.loc[df['formula'].str.contains("Cu"), 'formula'] = 'Cu' + df.loc[df['formula'].str.contains("Cu"), 'formula'].str.replace("Cu", "")
 
+CIF_DIR = ROOT / "data" / "crystaLLM" / "cif_files"
+STRUCTURES_DIR = OUTPUT_DIR / "structures"
+STRUCTURES_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _save_structure(fig, name: str) -> Path:
+    out = STRUCTURES_DIR / name
+    fig.write_html(str(out), include_plotlyjs=PLOTLYJS)
+    print(f"  Saved: {out.relative_to(ROOT)}")
+    return out
+
+
 # ---------------------------------------------------------------------------
 # 2. Figure 2 — data distribution (tau*/t* histograms and t* vs P(tau*))
 # ---------------------------------------------------------------------------
@@ -121,6 +133,19 @@ print("[Fig 3alt] Colormap radii (τ* raw) …")
 for anion in ["S", "Se"]:
     fig = colormap_radii_interactive(df=df_valid, exp_df=df_exp, t_sisso=True, anion=anion)
     _save(fig, f"colormap_radii_tsisso_{anion}.html")
+
+# ---------------------------------------------------------------------------
+# 1. Figure 4 — crystal structures (polyhedral view)
+# ---------------------------------------------------------------------------
+cif_files = sorted(CIF_DIR.glob("*.cif"))
+print(f"\n[Fig 4] Crystal structure polyhedral views ({len(cif_files)} structures) …")
+for cif_path in cif_files:
+    formula = cif_path.stem  # e.g. BaZrS3_1
+    try:
+        fig = plot_crystal_structure_interactive(cif_path, supercell=(1, 1, 1))
+        _save_structure(fig, f"{formula}.html")
+    except Exception as exc:
+        print(f"  WARNING: skipped {formula}: {exc}")
 
 # ---------------------------------------------------------------------------
 # 3. Figure 5 — plot_matrix (element×element bandgap matrix)

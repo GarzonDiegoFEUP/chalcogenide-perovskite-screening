@@ -1,8 +1,8 @@
-site_name: TF-ChPVK-PV
+site_name: chalcogenide-perovskite-screening
 site_description: ML-guided screening of chalcogenide perovskites as solar energy materials
 site_author: Diego A. Garzón
 
-repo_url: https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV
+repo_url: https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening
 edit_uri: ""
 
 nav:

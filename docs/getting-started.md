@@ -22,8 +22,8 @@ This guide covers environment setup and installation so you can run the full scr
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone the repository
-git clone https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV.git
-cd TF-ChPVK-PV
+git clone https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening.git
+cd chalcogenide-perovskite-screening
 
 # Install all dependencies
 uv sync --extra dev --extra notebooks
@@ -93,7 +93,7 @@ Once installed, head to the [Pipeline](pipeline.md) page to run the analysis not
 ## Project Structure
 
 ```
-TF-ChPVK-PV/
+chalcogenide-perovskite-screening/
 ├── data/                    # Data directory (raw, interim, processed)
 │   ├── raw/                 # Original immutable datasets
 │   ├── interim/             # Intermediate transformed data
