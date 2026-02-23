@@ -50,7 +50,7 @@ mineral commodity data and World Bank ESG indicators — are listed on the
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/LICENSE) file for details.
 
 ## Acknowledgements
 

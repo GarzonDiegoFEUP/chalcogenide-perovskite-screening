@@ -10,7 +10,7 @@ Run the notebooks in order. Each notebook is self-contained and will load the re
 
 ### Step 0 — Publication Figures
 
-[`0_figures_paper.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/0_figures_paper.ipynb)
+[`0_figures_paper.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/0_figures_paper.ipynb)
 
 Generates all publication-quality figures. Can be run after all other steps are complete, or independently using pre-computed results.
 
@@ -18,7 +18,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 ### Step 1 — Tolerance Factor & Feature Engineering
 
-[`1_get_SISSO_features.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/1_get_SISSO_features.ipynb)
+[`1_get_SISSO_features.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/1_get_SISSO_features.ipynb)
 
 - Load and normalize the chalcogenide perovskite dataset
 - Generate SISSO-derived primary features from ionic radii, electronegativities, and oxidation states
@@ -34,7 +34,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 ### Step 2 — CrystaLLM Structure Generation & Classification
 
-[`2_CrystaLLM_analysis.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/2_CrystaLLM_analysis.ipynb)
+[`2_CrystaLLM_analysis.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/2_CrystaLLM_analysis.ipynb)
 
 - Parse CrystaLLM-generated CIF files for candidate compositions
 - Classify generated structures as corner-sharing vs edge-sharing octahedral networks
@@ -45,7 +45,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 ### Step 3 — Experimental Plausibility (GCNN)
 
-[`3_Experimental_likelihood.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/3_Experimental_likelihood.ipynb)
+[`3_Experimental_likelihood.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/3_Experimental_likelihood.ipynb)
 
 - Assess crystal-likeness (synthesizability) using a pre-trained GCNN model
 - Generate synthesizability scores for all candidate structures
@@ -55,7 +55,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 ### Step 4 — Bandgap Prediction (CrabNet)
 
-[`4_bandgap_prediction.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/4_bandgap_prediction.ipynb)
+[`4_bandgap_prediction.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/4_bandgap_prediction.ipynb)
 
 - Train (or load) a CrabNet composition-based bandgap predictor
 - Evaluate model accuracy on experimental halide perovskite and chalcogenide data
@@ -64,14 +64,14 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 #### Step 4.1 — Encoder Comparison
 
-[`4_1_encoder_comparison.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/4_1_encoder_comparison.ipynb)
+[`4_1_encoder_comparison.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/4_1_encoder_comparison.ipynb)
 
 - Compare different elemental encoding strategies for CrabNet
 - Benchmark Pettifor-based vs default encoders
 
 #### Step 4.2 — Training Data Size Ablation
 
-[`4_2_data_size.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/4_2_data_size.ipynb)
+[`4_2_data_size.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/4_2_data_size.ipynb)
 
 - Analyse the effect of training set size on CrabNet bandgap prediction accuracy
 - Determine the minimum data requirement for reliable composition-based predictions
@@ -80,7 +80,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 
 ### Step 5 — Sustainability Analysis
 
-[`5_HHI_calculation.ipynb`](https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV/blob/main/notebooks/5_HHI_calculation.ipynb)
+[`5_HHI_calculation.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/5_HHI_calculation.ipynb)
 
 - Calculate the Herfindahl–Hirschman Index (HHI) for element supply concentration
 - Integrate ESG (Environmental, Social, Governance) risk scores

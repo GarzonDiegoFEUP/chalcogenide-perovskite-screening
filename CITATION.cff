@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: TF-ChPVK-PV
+title: chalcogenide-perovskite-screening
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -21,10 +21,10 @@ authors:
   - given-names: José A.
     family-names: Márquez
     orcid: 'https://orcid.org/0000-0002-8173-2566'
-repository-code: 'https://github.com/GarzonDiegoFEUP/TF-ChPVK-PV'
-url: 'https://garzondiegufeup.github.io/TF-ChPVK-PV/'
+repository-code: 'https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening'
+url: 'https://garzondiegufeup.github.io/chalcogenide-perovskite-screening/'
 abstract: >-
-  TF-ChPVK-PV is a Python package and analysis pipeline for
+  chalcogenide-perovskite-screening is a Python package and analysis pipeline for
   ML-guided screening of chalcogenide perovskites (ABX3,
   X = S, Se) as solar energy materials. It integrates a
   SISSO-derived tolerance factor, CrystaLLM crystal structure
