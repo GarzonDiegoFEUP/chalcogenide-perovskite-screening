@@ -90,7 +90,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_tsisso_S.html"
   width="100%"
-  height="600px"
+  height="700px"
   frameborder="0"
   scrolling="no">
 </iframe>
@@ -100,7 +100,7 @@ stability class.
 <iframe
   src="../assets/figures/colormap_radii_tsisso_Se.html"
   width="100%"
-  height="600px"
+  height="700px"
   frameborder="0"
   scrolling="no">
 </iframe>
