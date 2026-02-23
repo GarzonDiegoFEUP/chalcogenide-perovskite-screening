@@ -1,4 +1,4 @@
-# TF-ChPVK-PV
+# Chalcogenide-perovskite-screening
 
 **ML-guided screening of chalcogenide perovskites as solar energy materials**
 
