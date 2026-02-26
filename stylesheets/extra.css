@@ -1,0 +1,193 @@
+/* Header styling — white background with teal text */
+.md-header, .md-header__inner {
+    background-color: #fff;
+    color: #009688;
+}
+
+.md-header[data-md-state=shadow] {
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    transition: box-shadow 200ms linear;
+}
+
+.md-header__inner {
+    height: 80px;
+}
+
+.md-header__topic {
+    font-size: 24px;
+}
+
+/* Footer */
+.md-footer {
+    background-color: #009688;
+}
+
+/* Search bar hover */
+.md-search__form:hover {
+    background-color: rgba(0,0,0,.13);
+}
+
+/* Headings */
+.md-typeset h1 {
+    color: black;
+    font-weight: 700;
+}
+
+.md-typeset h1:has(img) {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.md-typeset h1 img {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+/* Card grid for homepage sections */
+.framework-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 24px;
+    row-gap: 24px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.framework-grid div {
+    border-radius: 8px;
+    padding: 24px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.framework-grid div:hover {
+    box-shadow: 0 4px 12px rgba(0, 150, 136, 0.2);
+    transform: translateY(-2px);
+}
+
+.framework-grid h3 {
+    margin-top: 0;
+    font-weight: 700;
+    color: #009688;
+}
+
+.framework-grid p {
+    color: #5f6368;
+    line-height: 1.6;
+}
+
+.framework-grid a {
+    color: #009688;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.framework-grid a:hover {
+    color: #FF5722;
+    text-decoration: underline;
+}
+
+/* Action buttons row */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 1.5em 0;
+    padding: 0;
+}
+
+.action-button {
+    padding: 8px 16px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    gap: 6px;
+    min-height: 34px !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+}
+
+.md-button--primary.action-button {
+    background-color: #009688 !important;
+    color: white !important;
+    border: 1px solid #009688 !important;
+}
+
+.md-button--primary.action-button:hover {
+    background-color: #00796B !important;
+    border-color: #00796B !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 150, 136, 0.3);
+}
+
+.md-button.action-button:not(.md-button--primary) {
+    background-color: #f5f5f5 !important;
+    color: #5f6368 !important;
+    border: 1px solid #d0d0d0 !important;
+}
+
+.md-button.action-button:not(.md-button--primary):hover {
+    background-color: #e8e8e8 !important;
+    color: #009688 !important;
+    border-color: #009688 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 150, 136, 0.15);
+}
+
+.action-button svg {
+    flex-shrink: 0;
+    display: block;
+    margin: 0;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .framework-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .action-button {
+        width: 100%;
+    }
+}
+
+/* Pipeline flow diagram container */
+.pipeline-flow {
+    margin: 2em 0;
+    overflow-x: auto;
+}
+
+/* Code copy button styling */
+.md-clipboard {
+    color: var(--md-default-fg-color--lighter);
+}
+
+.md-clipboard:hover {
+    color: var(--md-accent-fg-color);
+}
+
+/* Center button alignment */
+.md-typeset .md-button.center,
+.md-typeset a.md-button.center {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
