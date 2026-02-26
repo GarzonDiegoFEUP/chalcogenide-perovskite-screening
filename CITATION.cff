@@ -50,6 +50,12 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.18701742
     description: Zenodo archive (v1.0.1)
+  - type: doi
+    value: 10.48550/arXiv.2602.21812
+    description: arXiv preprint
+  - type: url
+    value: https://arxiv.org/abs/2602.21812
+    description: arXiv preprint
 funding:
   - name: >-
       Fundação para a Ciência e Tecnologia, I.P. (FCT)
