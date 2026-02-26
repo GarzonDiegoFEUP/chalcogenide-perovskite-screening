@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,CaCeS3,"['CeS2', 'CaS']",-0.00020000000000095497,-0.00020000000000042206,CeS2 + CaS -> CaCeS3,[]
+0,CaCeS3,"['CeS2', 'CaS']",-0.00019999999999811277,-0.00019999999999775753,CeS2 + CaS -> CaCeS3,[]

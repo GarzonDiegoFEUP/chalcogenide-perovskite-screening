@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,SrUS3,"['SrU2S5', 'SrS']",-0.0002000000000052182,-0.00020000000000575113,0.5 SrU2S5 + 0.5 SrS -> SrUS3,[]
+0,SrUS3,"['SrU2S5', 'SrS']",-0.0002000000000052183,-0.00020000000000575113,0.5 SrU2S5 + 0.5 SrS -> SrUS3,[]

@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,EuDyS3,"['EuS2', 'Eu(DyS2)2']",-0.00019999999996116454,-0.0001999999999613422,0.5 EuS2 + 0.5 Eu(DyS2)2 -> EuDyS3,[]
+0,EuDyS3,"['EuS2', 'Eu(DyS2)2']",-0.00019999999996684898,-0.00019999999996667128,0.5 EuS2 + 0.5 Eu(DyS2)2 -> EuDyS3,[]

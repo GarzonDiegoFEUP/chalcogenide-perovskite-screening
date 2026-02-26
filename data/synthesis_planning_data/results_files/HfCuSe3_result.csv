@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,HfCuSe3,"['CuSe', 'HfSe2']",-0.00019999999998532295,-0.0001999999999862112,CuSe + HfSe2 -> HfCuSe3,[]
+0,HfCuSe3,"['CuSe', 'HfSe2']",-0.000199999999985323,-0.00019999999998443485,CuSe + HfSe2 -> HfCuSe3,[]

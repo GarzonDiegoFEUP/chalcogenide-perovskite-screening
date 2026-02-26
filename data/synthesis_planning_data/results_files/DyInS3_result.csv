@@ -1,3 +1,3 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,DyInS3,"['InS', 'DyS2']",-0.10805064037499573,-0.10805064037499612,InS + DyS2 -> DyInS3,"[['Dy2S3', 'In2S3']]"
-1,DyInS3,"['Dy2S3', 'In2S3']",-0.00019999999999882327,-0.0001999999999986457,0.5 Dy2S3 + 0.5 In2S3 -> DyInS3,[]
+0,DyInS3,"['InS', 'DyS2']",-0.1080506403749993,-0.10805064037499879,InS + DyS2 -> DyInS3,"[['Dy2S3', 'In2S3']]"
+1,DyInS3,"['Dy2S3', 'In2S3']",-0.00020000000000024447,-0.00020000000000042206,0.5 Dy2S3 + 0.5 In2S3 -> DyInS3,[]

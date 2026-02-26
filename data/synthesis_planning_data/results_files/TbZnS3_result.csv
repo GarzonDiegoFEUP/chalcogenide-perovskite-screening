@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,TbZnS3,"['ZnS', 'TbS2']",-0.00020000000000663923,-0.0002000000000066393,ZnS + TbS2 -> TbZnS3,[]
+0,TbZnS3,"['ZnS', 'TbS2']",-0.00020000000000450763,-0.00020000000000397478,ZnS + TbS2 -> TbZnS3,[]

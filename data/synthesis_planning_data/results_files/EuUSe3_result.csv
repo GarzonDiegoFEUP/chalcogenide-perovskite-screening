@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,EuUSe3,"['EuSe', 'USe2']",-0.00020000000000095503,-0.00019999999999775753,EuSe + USe2 -> EuUSe3,[]
+0,EuUSe3,"['EuSe', 'USe2']",-0.00019999999999669176,-0.00019999999999598117,EuSe + USe2 -> EuUSe3,[]

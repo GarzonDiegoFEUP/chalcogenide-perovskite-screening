@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,UInSe3,"['USe2', 'InSe']",-0.00019999999999029683,-0.00019999999998976392,USe2 + InSe -> UInSe3,[]
+0,UInSe3,"['USe2', 'InSe']",-0.0001999999999874546,-0.00019999999998709939,USe2 + InSe -> UInSe3,[]

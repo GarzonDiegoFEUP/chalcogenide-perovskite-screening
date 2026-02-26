@@ -1,3 +1,3 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,CeUS3,"['US', 'Ce2US5']",-0.016570296000072926,-0.016570296000073093,0.5 US + 0.5 Ce2US5 -> CeUS3,"[['Ce2S3', 'U2S3']]"
+0,CeUS3,"['US', 'Ce2US5']",-0.0165702960000715,-0.016570296000071316,0.5 US + 0.5 Ce2US5 -> CeUS3,"[['Ce2S3', 'U2S3']]"
 1,CeUS3,"['U2S3', 'Ce2S3']",-0.00019999999997821752,-0.0001999999999782176,0.5 U2S3 + 0.5 Ce2S3 -> CeUS3,[]

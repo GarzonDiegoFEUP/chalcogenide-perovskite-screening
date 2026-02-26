@@ -1,4 +1,4 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,LaTbS3,"['LaS2', 'TbS']",-0.21307448125003817,-0.03678303114293158,LaS2 + TbS -> LaTbS3,"[['La10S19', 'Tb2S3'], ['La2S3', 'Tb2S3'], ['La2S3', 'Tb5S7'], ['Tb5S7', 'LaS']]"
-1,LaTbS3,"['TbS2', 'LaS']",-0.2319133867500426,-0.026691160482759102,TbS2 + LaS -> LaTbS3,"[['LaS2', 'Tb2S3'], ['La10S19', 'Tb2S3'], ['La2S3', 'Tb2S3'], ['La2S3', 'Tb5S7']]"
-2,LaTbS3,"['La2S3', 'Tb2S3']",-0.0002000000000393242,-0.0002000000000395019,0.5 La2S3 + 0.5 Tb2S3 -> LaTbS3,[]
+0,LaTbS3,"['LaS2', 'TbS']",-0.21307448125003667,-0.03678303114292625,LaS2 + TbS -> LaTbS3,"[['La10S19', 'Tb2S3'], ['La2S3', 'Tb2S3'], ['La2S3', 'Tb5S7'], ['Tb5S7', 'LaS']]"
+1,LaTbS3,"['TbS2', 'LaS']",-0.23191338675003972,-0.026691160482757326,TbS2 + LaS -> LaTbS3,"[['LaS2', 'Tb2S3'], ['La10S19', 'Tb2S3'], ['La2S3', 'Tb2S3'], ['La2S3', 'Tb5S7']]"
+2,LaTbS3,"['La2S3', 'Tb2S3']",-0.00020000000004216648,-0.00020000000004216645,0.5 La2S3 + 0.5 Tb2S3 -> LaTbS3,[]
