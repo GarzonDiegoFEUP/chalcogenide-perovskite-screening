@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, List, Optional, Tuple, Union
+from typing import Any
 
 import torch
 from loguru import logger
@@ -174,8 +174,8 @@ def load_model(model_path: Path = TRAINED_MODELS / 'perovskite_bg_prediction.pth
     return crabnet_model
 
 def get_test_r2_score_by_source_data(df: pd.DataFrame, original_df: pd.DataFrame,
-                                     feature_names: List[str],
-                                     crabnet_bandgap: Optional[Any] = None,
+                                     feature_names: list[str],
+                                     crabnet_bandgap: Any | None = None,
                                      model_path: Path = TRAINED_MODELS / 'perovskite_bg_prediction.pth',) -> None:
     """Compute R^2 scores separately for each data source.
 
@@ -269,7 +269,7 @@ def predict_bandgap(formula,
   return prediction, prediction_sigma
 
 
-def get_CrystaLLM_predictions(crabnet_model: Optional[Any] = None,
+def get_CrystaLLM_predictions(crabnet_model: Any | None = None,
                                input_data_CrystaLLM: Path = CRYSTALLM_DATA_DIR / 'results_crystallm.csv',
                                output_data_CrystaLLM: Path = PROCESSED_DATA_DIR / 'results_CrystaLLM_with_bandgap.csv') -> pd.DataFrame:
     """Predict bandgaps for CrystaLLM-generated compositions.
@@ -298,7 +298,7 @@ def get_CrystaLLM_predictions(crabnet_model: Optional[Any] = None,
 
     return df_compositions
 
-def get_SISSO_predictions(crabnet_model: Optional[Any] = None,
+def get_SISSO_predictions(crabnet_model: Any | None = None,
                           input_data_SISSO: Path = PROCESSED_DATA_DIR / 'stable_compositions.csv',
                           output_data_SISSO: Path = PROCESSED_DATA_DIR / 'results_SISSO_with_bandgap.csv') -> pd.DataFrame:
     """Predict bandgaps for SISSO-selected stable compositions.
@@ -330,7 +330,7 @@ def get_SISSO_predictions(crabnet_model: Optional[Any] = None,
 
     return df_compositions
 
-def get_experimental_predictions(crabnet_model: Optional[Any] = None,
+def get_experimental_predictions(crabnet_model: Any | None = None,
                                  input_data_experimental: Path = RAW_DATA_DIR / 'chalcogenides_bandgap_devices.csv',
                                  output_data_experimental: Path = PROCESSED_DATA_DIR / 'results_experimental_with_bandgap.csv',) -> pd.DataFrame:
     """Predict bandgaps for experimental chalcogenide formulas and compare.

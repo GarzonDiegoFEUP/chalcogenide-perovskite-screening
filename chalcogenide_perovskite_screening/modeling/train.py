@@ -1,12 +1,13 @@
 from pathlib import Path
-from typing import Any, Dict, Tuple
+from typing import Any
 
 import typer
 from loguru import logger
 from tqdm import tqdm
 import numpy as np
-from sklearn import tree, metrics
+from sklearn import tree, metrics, set_config
 from sklearn.model_selection import cross_validate
+set_config(enable_metadata_routing=True)
 from sklearn.calibration import CalibratedClassifierCV 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -51,7 +52,7 @@ def main():
 
 
 def train_platt_scaling(train_df: pd.DataFrame, test_df: pd.DataFrame, clf_t: Any, t: str = 't_sisso',
-                        output_dir: Path = RESULTS_DIR) -> Tuple[pd.DataFrame, pd.DataFrame, CalibratedClassifierCV]:
+                        output_dir: Path = RESULTS_DIR) -> tuple[pd.DataFrame, pd.DataFrame, CalibratedClassifierCV]:
     """Train Platt scaling model for probability calibration.
 
     Applies isotonic regression (CalibratedClassifierCV) to convert raw
@@ -197,8 +198,8 @@ def train_tree_sis_features_Ch(
                 continue                           # take the first column values
             else:
                 clf = tree.DecisionTreeClassifier(max_depth=depth, class_weight='balanced', criterion='entropy')
-                
-                clf_cv = cross_validate(clf, x.reshape(-1,1), labels, scoring='f1', fit_params={'sample_weight': sample_weights})
+                clf.set_fit_request(sample_weight=True)
+                clf_cv = cross_validate(clf, x.reshape(-1,1), labels, scoring='f1', params={'sample_weight': sample_weights})
                 clf_cv_score = np.mean(clf_cv['test_score'])
                 
                 #clf = clf.fit(x.reshape(-1,1), labels)                     # Build a decision-tree classifier from the training set (X, y). X is the values of features (for each for iteration on column) and Y is the target value, here exp_label
@@ -220,7 +221,7 @@ def train_tree_sis_features_Ch(
     
 def evaluate_t_sisso(t_sisso_expression: str, idx: int = -1,
                      train_df_path: Path = PROCESSED_DATA_DIR / "chpvk_train_dataset.csv",
-                     test_df_path: Path = PROCESSED_DATA_DIR / "chpvk_test_dataset.csv") -> Tuple[pd.DataFrame, pd.DataFrame, Dict[str, Any]]:
+                     test_df_path: Path = PROCESSED_DATA_DIR / "chpvk_test_dataset.csv") -> tuple[pd.DataFrame, pd.DataFrame, dict[str, Any]]:
     """Evaluate tolerance factor expressions on train and test datasets.
 
     Computes t_sisso and reference tolerance factors (t, tau, t_jess) for
@@ -313,8 +314,8 @@ def evaluate_t_sisso(t_sisso_expression: str, idx: int = -1,
 
     return train_df, test_df, tolerance_factor_dict
 
-def test_tolerance_factor(t: str, train_df: pd.DataFrame, test_df: pd.DataFrame, tolerance_factor_dict: Dict[str, Any], df_acc: pd.DataFrame = pd.DataFrame(),
-                          n_tresh: int = 1, cl_w: str = 'balanced', crit: str = 'entropy') -> Tuple[pd.DataFrame, Any]:
+def test_tolerance_factor(t: str, train_df: pd.DataFrame, test_df: pd.DataFrame, tolerance_factor_dict: dict[str, Any], df_acc: pd.DataFrame = pd.DataFrame(),
+                          n_tresh: int = 1, cl_w: str = 'balanced', crit: str = 'entropy') -> tuple[pd.DataFrame, Any]:
     """Test a tolerance factor using decision tree classification.
 
     Trains a decision tree on the tolerance factor values, determines optimal
@@ -416,8 +417,8 @@ def test_tolerance_factor(t: str, train_df: pd.DataFrame, test_df: pd.DataFrame,
     
     return df_acc, clf1_model
 
-def test_tolerance_factor_Ch(t: str, train_df: pd.DataFrame, test_df: pd.DataFrame, tolerance_factor_dict: Dict[str, Any], df_acc: pd.DataFrame = pd.DataFrame(),
-                          n_tresh: int = 1, cl_w: str = 'balanced', crit: str = 'entropy') -> Tuple[pd.DataFrame, Any]:
+def test_tolerance_factor_Ch(t: str, train_df: pd.DataFrame, test_df: pd.DataFrame, tolerance_factor_dict: dict[str, Any], df_acc: pd.DataFrame = pd.DataFrame(),
+                          n_tresh: int = 1, cl_w: str = 'balanced', crit: str = 'entropy') -> tuple[pd.DataFrame, Any]:
     """Test a tolerance factor with sample weights for chalcogenide compounds.
 
     Similar to test_tolerance_factor but applies 2x weight to chalcogenide

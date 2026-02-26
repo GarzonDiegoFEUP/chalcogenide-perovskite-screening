@@ -19,7 +19,7 @@ from __future__ import annotations
 import os
 import json
 from time import time
-from turtle import pd
+import pandas as pd
 from sklearn import metrics
 import sys
 import numpy as np
