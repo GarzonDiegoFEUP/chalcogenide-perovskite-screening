@@ -6,13 +6,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.1-green.svg)](CITATION.cff)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18701742.svg)](https://doi.org/10.5281/zenodo.18701742)
+[![arXiv](https://img.shields.io/badge/arXiv-2602.21812-b31b1b.svg)](https://arxiv.org/abs/2602.21812)
 
 This repository contains the datasets, analysis notebooks, and source code for the paper:
 
 > D. A. Garzón, L. Himanen, L. Andrade, S. Sadewasser, J. A. Márquez,
-> *"ML-guided screening of chalcogenide perovskites as solar energy materials"* (2026).
->
-> **Preprint coming soon.**
+> *"ML-guided screening of chalcogenide perovskites as solar energy materials"*,
+> arXiv:2602.21812 (2026).
+> [https://arxiv.org/abs/2602.21812](https://arxiv.org/abs/2602.21812)
 
 ## Overview
 
@@ -193,6 +194,20 @@ Key methods and data sources used in this pipeline:
 If you use this software or data, please cite it using the metadata in [`CITATION.cff`](CITATION.cff):
 
 ```bibtex
+@misc{garzon2026mlguided,
+  title   = {{ML-guided screening of chalcogenide perovskites as solar energy materials}},
+  author  = {Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
+             and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
+  year    = {2026},
+  eprint  = {2602.21812},
+  archivePrefix = {arXiv},
+  primaryClass  = {cond-mat.mtrl-sci},
+  doi     = {10.48550/arXiv.2602.21812},
+  url     = {https://arxiv.org/abs/2602.21812},
+}
+```
+
+```bibtex
 @software{garzon2026chalc_screening,
   author  = {Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
              and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
@@ -204,8 +219,6 @@ If you use this software or data, please cite it using the metadata in [`CITATIO
   license = {MIT},
 }
 ```
-
-<!-- TODO: add paper BibTeX once published -->
 
 ## License
 

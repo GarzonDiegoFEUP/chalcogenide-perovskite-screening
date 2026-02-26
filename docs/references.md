@@ -5,20 +5,24 @@
 If you use this code, data, or methodology in your research, please cite:
 
 > D. A. Garzón, L. Himanen, L. Andrade, S. Sadewasser, J. A. Márquez,
-> *"ML-guided screening of chalcogenide perovskites as solar energy materials"* (2026).
+> *"ML-guided screening of chalcogenide perovskites as solar energy materials"*,
+> arXiv:2602.21812 (2026).
+> [https://arxiv.org/abs/2602.21812](https://arxiv.org/abs/2602.21812)
 
 ```bibtex
-@article{garzon2026mlguided,
-  title={ML-guided screening of chalcogenide perovskites
-         as solar energy materials},
-  author={Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
-          and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
-  year={2026}
+@misc{garzon2026mlguided,
+  title   = {{ML-guided screening of chalcogenide perovskites
+             as solar energy materials}},
+  author  = {Garz{\'o}n, Diego A. and Himanen, Lauri and Andrade, Luisa
+             and Sadewasser, Sascha and M{\'a}rquez, Jos{\'e} A.},
+  year    = {2026},
+  eprint  = {2602.21812},
+  archivePrefix = {arXiv},
+  primaryClass  = {cond-mat.mtrl-sci},
+  doi     = {10.48550/arXiv.2602.21812},
+  url     = {https://arxiv.org/abs/2602.21812},
 }
 ```
-
-!!! note "Preprint"
-    The preprint will be made available soon. This BibTeX entry will be updated with the DOI and journal information upon publication.
 
 ## Key References
 
