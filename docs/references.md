@@ -39,6 +39,7 @@ The methods and data sources used in this pipeline:
 | ESG data | World Bank. *Environment, Social and Governance Data* (2023) | [Data Catalog](https://datacatalog.worldbank.org/search/dataset/0037651) |
 | Synthesizability (GCNN) | Gu, G. H. et al. *npj Computational Materials* **8**, 71 (2022) | [10.1038/s41524-022-00757-z](https://doi.org/10.1038/s41524-022-00757-z) |
 | Synthesizability | Jang, J. et al. *J. Am. Chem. Soc.* **142**, 18836–18843 (2020) | [10.1021/jacs.0c07384](https://doi.org/10.1021/jacs.0c07384) |
+| UMA MLIP (structure relaxation) | Meta FAIR. *UMA: A Family of Universal Models for Atoms* arXiv:2506.23971 (2025) | [10.48550/arXiv.2506.23971](https://doi.org/10.48550/arXiv.2506.23971) |
 
 ## Raw Data Sources
 

@@ -4,12 +4,12 @@ This guide covers environment setup and installation so you can run the full scr
 
 ## Prerequisites
 
-- **Python <= 3.8.20** (required by dependency constraints)
+- **Python 3.11** (required by dependency constraints)
 - Git
 - [uv](https://docs.astral.sh/uv/) (recommended) or pip
 
 !!! warning "Python version constraint"
-    This project requires **Python <= 3.8.20** due to specific dependency version locks. Using a newer Python version will cause resolution failures.
+    This project requires **Python 3.11** (`>=3.11,<3.12`). Using Python 3.12+ or older versions will cause resolution failures.
 
 ## Installation
 

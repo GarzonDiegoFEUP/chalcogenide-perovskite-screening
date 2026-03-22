@@ -41,6 +41,17 @@ Generates all publication-quality figures. Can be run after all other steps are 
 - Filter for topologically valid ABX₃ perovskite geometries
 - Assess structural diversity across generated candidates
 
+#### Step 2.1 — Structure Relaxation
+
+[`2_1_StructureRelaxation.ipynb`](https://github.com/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/2_1_StructureRelaxation.ipynb)
+
+- Relax CrystaLLM-generated structures at DFT level using the FairChem/OMat24 universal force field
+- Compare relaxed vs unrelaxed geometries and validate perovskite topology post-relaxation
+- Store relaxed CIF files in `data/crystaLLM/relaxed_cif_files/`
+
+!!! note "Runs on Google Colab"
+    This notebook requires GPU access and is designed to run on [Google Colab](https://colab.research.google.com/github/GarzonDiegoFEUP/chalcogenide-perovskite-screening/blob/main/notebooks/2_1_StructureRelaxation.ipynb). A Hugging Face API key is needed to download the OMat24 model.
+
 ---
 
 ### Step 3 — Experimental Plausibility (GCNN)
@@ -93,6 +104,7 @@ Generates all publication-quality figures. Can be run after all other steps are 
 |------|--------|---------|
 | 1 | `data/raw/` ionic radii, electronegativities | `data/interim/features_sisso.csv`, screened compositions |
 | 2 | CrystaLLM CIF files in `data/crystaLLM/` | Classified structures, topology labels |
+| 2.1 | CrystaLLM CIF files | Relaxed CIF files in `data/crystaLLM/relaxed_cif_files/`, `structure_relaxation_results.csv` |
 | 3 | Candidate CIF structures | Crystal-likeness scores |
 | 4 | Candidate compositions | Predicted bandgaps |
-| 5 | All previous outputs, `data/sustainability_data/` | Final ranked candidate list |
+| 5 | All previous outputs, `data/sustainability_data/` | Multi-objective sustainability ranking |

@@ -2,7 +2,7 @@
 
 **ML-guided screening of chalcogenide perovskites as solar energy materials**
 
-[![Python 3.8.2](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.1-green.svg)](CITATION.cff)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18701742.svg)](https://doi.org/10.5281/zenodo.18701742)
@@ -43,7 +43,7 @@ pipeline that integrates:
 
 ## Installation
 
-**Requirements:** Python <= 3.8.20.
+**Requirements:** Python 3.11.
 
 ### Using uv (recommended)
 
@@ -113,6 +113,7 @@ The analysis is organized as a sequential pipeline. Run notebooks in order:
 | 0 | `0_figures_paper.ipynb` | Generate all publication figures |
 | 1 | `1_get_SISSO_features.ipynb` | Dataset creation, SISSO feature generation, tolerance factor training and evaluation, Platt scaling, compositional screening |
 | 2 | `2_CrystaLLM_analysis.ipynb` | Parse CrystaLLM-generated CIF files, crystal-likeness scoring, corner-sharing vs edge-sharing classification |
+| 2.1 | `2_1_StructureRelaxation.ipynb` | UMA MLIP structure relaxation of CrystaLLM-generated structures via FairChem/OMat24 (runs on Colab) |
 | 3 | `3_Experimental_likelihood.ipynb` | GCNN-based synthesizability assessment and experimental plausibility scoring |
 | 4 | `4_bandgap_prediction.ipynb` | CrabNet bandgap model: training, evaluation, predictions for all candidates |
 | 4.1 | `4_1_encoder_comparison.ipynb` | Compare elemental encoding strategies for CrabNet (Pettifor vs default) |
@@ -188,6 +189,7 @@ Key methods and data sources used in this pipeline:
 | ESG data | World Bank. *Environment, Social and Governance Data* (2023) | [Data Catalog](https://datacatalog.worldbank.org/search/dataset/0037651) |
 | Synthesizability (GCNN) | Gu, G. H. et al. *npj Computational Materials* **8**, 71 (2022) | [10.1038/s41524-022-00757-z](https://doi.org/10.1038/s41524-022-00757-z) |
 | Synthesizability | Jang, J. et al. *J. Am. Chem. Soc.* **142**, 18836–18843 (2020) | [10.1021/jacs.0c07384](https://doi.org/10.1021/jacs.0c07384) |
+| UMA MLIP (structure relaxation) | Meta FAIR. *UMA: A Family of Universal Models for Atoms* arXiv:2506.23971 (2025) | [10.48550/arXiv.2506.23971](https://doi.org/10.48550/arXiv.2506.23971) |
 
 ## Citation
 
