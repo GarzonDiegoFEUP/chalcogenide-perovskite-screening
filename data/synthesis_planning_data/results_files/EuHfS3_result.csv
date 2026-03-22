@@ -1,3 +1,3 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,EuHfS3,"['EuS2', 'HfS']",-0.37333723050000783,-0.22328404216667863,EuS2 + HfS -> EuHfS3,"[['Eu3S4', 'HfS3']]"
-1,EuHfS3,"['EuS', 'HfS2']",-0.004473731499989243,-0.004473731499990308,EuS + HfS2 -> EuHfS3,[]
+0,EuHfS3,"['EuS2', 'HfS']",-0.3733372305000078,-0.2232840421666733,EuS2 + HfS -> EuHfS3,"[['Eu3S4', 'HfS3']]"
+1,EuHfS3,"['EuS', 'HfS2']",-0.004473731499986399,-0.004473731499986755,EuS + HfS2 -> EuHfS3,[]

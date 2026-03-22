@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,SrCeS3,"['SrS', 'CeS2']",-0.0002000000000101921,-0.00020000000001019203,SrS + CeS2 -> SrCeS3,[]
+0,SrCeS3,"['SrS', 'CeS2']",-0.000200000000008771,-0.00020000000000841567,SrS + CeS2 -> SrCeS3,[]

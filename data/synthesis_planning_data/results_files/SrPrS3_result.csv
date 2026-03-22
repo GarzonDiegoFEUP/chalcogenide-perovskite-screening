@@ -1,2 +1,2 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,SrPrS3,"['SrS', 'PrS2']",-0.0002000000000187186,-0.0002000000000190738,SrS + PrS2 -> SrPrS3,[]
+0,SrPrS3,"['SrS', 'PrS2']",-0.00020000000001587642,-0.0002000000000155211,SrS + PrS2 -> SrPrS3,[]

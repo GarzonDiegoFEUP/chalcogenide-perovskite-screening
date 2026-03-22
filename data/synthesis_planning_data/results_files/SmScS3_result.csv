@@ -1,3 +1,3 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,SmScS3,"['ScS', 'SmS2']",-0.20758151150003695,-0.16405940025000998,ScS + SmS2 -> SmScS3,"[['Sm10S19', 'Sc2S3']]"
-1,SmScS3,"['Sc2S3', 'Sm2S3']",-0.007425410500007982,-0.00742541050000689,0.5 Sc2S3 + 0.5 Sm2S3 -> SmScS3,[]
+0,SmScS3,"['ScS', 'SmS2']",-0.2075815115000361,-0.16405940025001264,ScS + SmS2 -> SmScS3,"[['Sm10S19', 'Sc2S3']]"
+1,SmScS3,"['Sc2S3', 'Sm2S3']",-0.0074254105000051375,-0.007425410500005114,0.5 Sc2S3 + 0.5 Sm2S3 -> SmScS3,[]

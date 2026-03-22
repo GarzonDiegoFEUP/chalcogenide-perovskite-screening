@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import typer
 from loguru import logger
@@ -300,7 +300,7 @@ def plot_p_t_sisso_tf(tf: str, train_input_path: Path = RESULTS_DIR / "processed
         logger.error(f"P(t_sisso) as a function of {tf} plot cannot be generated as the required columns are not present in the dataframes.")
 
 
-def graph_periodic_table(stable_candidates_t_sisso: List[str], t: str = 't_sisso', save_plot: bool = True, cmap_: str = 'turbo') -> None:
+def graph_periodic_table(stable_candidates_t_sisso: list[str], t: str = 't_sisso', save_plot: bool = True, cmap_: str = 'turbo') -> None:
     """Generate periodic table heatmap showing element frequency in stable candidates.
 
     Creates a heatmap visualization of the periodic table where each element's
@@ -313,20 +313,18 @@ def graph_periodic_table(stable_candidates_t_sisso: List[str], t: str = 't_sisso
         save_plot: If True, save the figure to the figures directory.
         cmap_: Matplotlib colormap name for the heatmap.
     """
-    from pymatviz import count_elements,  ptable_heatmap_plotly, ptable_heatmap
-    import matplotlib.pyplot as plt
+    from pymatviz import count_elements, ptable_heatmap_plotly
     import re
 
     element_counts = count_elements([re.sub(r'\d+', '', x) for x in stable_candidates_t_sisso])
 
-    # Plot the periodic table heatmap
-    ptable_heatmap(element_counts, log=False, heat_mode='value', cmap=cmap_)#, show_values=True)
-    #fig.update_layout(title=dict(text="<b>Elements in the chemical space</b>", x=0.36, y=0.9))
+    # Plot the periodic table heatmap (plotly version; ptable_heatmap matplotlib removed in pymatviz 0.10+)
+    fig = ptable_heatmap_plotly(element_counts, log=False, heat_mode='value', colorscale=cmap_)
     if save_plot:
-      txt_title = "periodic_table_heatmap_" + t + ".png"
-      plt.savefig(FIGURES_DIR / txt_title, dpi=600)
+        txt_title = "periodic_table_heatmap_" + t + ".png"
+        fig.write_image(str(FIGURES_DIR / txt_title), scale=2)
 
-    plt.show()
+    fig.show()
 
 
 def spider_plot(df: pd.DataFrame, title: str) -> None:
@@ -525,7 +523,7 @@ def plot_tau_star_histogram_interactive(threshold: float, df: pd.DataFrame) -> A
     return fig
 
 
-def plot_t_star_histogram(thresholds: List[float], df: pd.DataFrame) -> None:
+def plot_t_star_histogram(thresholds: list[float], df: pd.DataFrame) -> None:
     """Create histogram of t* (Jess et al.) tolerance factor values by stability class.
 
     Generates a histogram showing the distribution of t* values with
@@ -574,7 +572,7 @@ def plot_t_star_histogram(thresholds: List[float], df: pd.DataFrame) -> None:
     plt.show()
 
 
-def plot_t_star_histogram_interactive(thresholds: List[float], df: pd.DataFrame) -> Any:
+def plot_t_star_histogram_interactive(thresholds: list[float], df: pd.DataFrame) -> Any:
     """Create interactive histogram of t* (Jess et al.) tolerance factor values by stability class.
 
     Interactive Plotly version of :func:`plot_t_star_histogram`. Generates a
@@ -641,7 +639,7 @@ def plot_t_star_histogram_interactive(thresholds: List[float], df: pd.DataFrame)
     return fig
 
 
-def plot_t_star_vs_p_t_sisso(df: pd.DataFrame, thresholds: List[float]) -> None:
+def plot_t_star_vs_p_t_sisso(df: pd.DataFrame, thresholds: list[float]) -> None:
     """Create scatter plot of t* vs P(τ*) with stability regions.
 
     Visualizes the relationship between the Jess et al. tolerance factor (t*)
@@ -693,7 +691,7 @@ def plot_t_star_vs_p_t_sisso(df: pd.DataFrame, thresholds: List[float]) -> None:
     plt.show()
 
 
-def plot_t_star_vs_p_t_sisso_interactive(df: pd.DataFrame, thresholds: List[float]) -> Any:
+def plot_t_star_vs_p_t_sisso_interactive(df: pd.DataFrame, thresholds: list[float]) -> Any:
     """Create interactive scatter plot of t* vs P(τ*) with stability regions.
 
     Interactive Plotly version of :func:`plot_t_star_vs_p_t_sisso`. Visualizes
@@ -773,7 +771,7 @@ def plot_t_star_vs_p_t_sisso_interactive(df: pd.DataFrame, thresholds: List[floa
     return fig
 
 
-def colormap_radii(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba: Optional[Any] = None, t_sisso: bool = False) -> None:
+def colormap_radii(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba: Any | None = None, t_sisso: bool = False) -> None:
     """Create 2D colormap of stability predictions vs ionic radii for S and Se anions.
 
     Generates side-by-side heatmaps showing t_sisso or P(t_sisso) values across
@@ -944,7 +942,7 @@ def confusion_matrix_plot(df: pd.DataFrame, test: bool = True) -> None:
     plt.savefig(FIGURES_DIR / f'confusion_matrix_{"test" if test else "train"}.png', dpi=600, bbox_inches='tight')
     plt.show()
 
-def normalize_abx3(formula: str) -> Optional[str]:
+def normalize_abx3(formula: str) -> str | None:
     """Normalize a perovskite formula to standard ABX3 format.
 
     Parses a chemical formula and reorders elements to place the two cations
@@ -975,7 +973,7 @@ def normalize_abx3(formula: str) -> Optional[str]:
 
     return f"{AB[0]}{AB[1]}{X}3"
 
-def plot_matrix(df_out: pd.DataFrame, df_crystal: pd.DataFrame, anion: str = 'S', parameter: str = 'Eg', clf_proba: Optional[Any] = None) -> None:
+def plot_matrix(df_out: pd.DataFrame, df_crystal: pd.DataFrame, anion: str = 'S', parameter: str = 'Eg', clf_proba: Any | None = None) -> None:
     """Create scatter matrix of cation A vs cation B colored by bandgap or P(t_sisso).
 
     Generates a matrix plot showing all predicted compositions for a given anion,
@@ -1114,7 +1112,7 @@ def plot_matrix(df_out: pd.DataFrame, df_crystal: pd.DataFrame, anion: str = 'S'
     plt.show()
 
 def pareto_front_plot(df: pd.DataFrame, variable: str, Eg_ref: float = 1.34,
-                  plot_names: bool = False, ax: Optional[Any] = None,
+                  plot_names: bool = False, ax: Any | None = None,
                   same_y_axis: bool = False, 
                   plot_PCE: bool = False,
                   sj_limit_path: Path = RAW_DATA_DIR / "SJ_limit.csv",
@@ -1400,7 +1398,7 @@ def plot_PCA(df_scaled: pd.DataFrame, df_pca: pd.DataFrame, original_df: pd.Data
 
     plt.show()
 
-def corr_matrix(df: pd.DataFrame, metrics: List[str], dict_labels: Dict[str, str]) -> None:
+def corr_matrix(df: pd.DataFrame, metrics: list[str], dict_labels: dict[str, str]) -> None:
     """Generate Spearman rank-correlation matrix heatmap for scoring metrics.
 
     Creates a heatmap of pairwise Spearman correlations (robust to non-normal
@@ -1493,7 +1491,7 @@ def corr_matrix(df: pd.DataFrame, metrics: List[str], dict_labels: Dict[str, str
 
 
 
-def colormap_radii_interactive(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba: Optional[Any] = None, t_sisso: bool = False, anion: Optional[str] = None) -> Any:
+def colormap_radii_interactive(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba: Any | None = None, t_sisso: bool = False, anion: str | None = None) -> Any:
     """Create interactive 2D heatmap of stability predictions vs ionic radii.
 
     Interactive Plotly version of :func:`colormap_radii`. Generates heatmaps
@@ -1633,7 +1631,7 @@ def colormap_radii_interactive(df: pd.DataFrame, exp_df: pd.DataFrame, clf_proba
     return fig
 
 
-def plot_matrix_interactive(df_out: pd.DataFrame, df_crystal: pd.DataFrame, anion: str = 'S', parameter: str = 'Eg', clf_proba: Optional[Any] = None) -> Any:
+def plot_matrix_interactive(df_out: pd.DataFrame, df_crystal: pd.DataFrame, anion: str = 'S', parameter: str = 'Eg', clf_proba: Any | None = None) -> Any:
     """Create interactive element-element matrix colored by bandgap or P(t_sisso).
 
     Interactive Plotly version of :func:`plot_matrix`. Generates a matrix scatter
@@ -1926,7 +1924,7 @@ def pareto_front_interactive(df: pd.DataFrame, variable: str, Eg_ref: float = 1.
     return fig
 
 
-def corr_matrix_interactive(df: pd.DataFrame, metrics: List[str], dict_labels: Dict[str, str]) -> Any:
+def corr_matrix_interactive(df: pd.DataFrame, metrics: list[str], dict_labels: dict[str, str]) -> Any:
     """Create interactive Spearman rank correlation matrix heatmap.
 
     Interactive Plotly version of :func:`corr_matrix`. Generates an annotated
@@ -1988,7 +1986,7 @@ def corr_matrix_interactive(df: pd.DataFrame, metrics: List[str], dict_labels: D
 _CHALCOGENS = {'S', 'Se', 'Te'}
 
 # CPK-inspired colors for elements common in this dataset
-_ELEMENT_COLORS: Dict[str, str] = {
+_ELEMENT_COLORS: dict[str, str] = {
     # Anions
     'S':  '#f5c542', 'Se': '#e89b3a',
     # Common A-site
@@ -2034,7 +2032,7 @@ def _site_roles(structure: Any) -> tuple:
         return role_map, cation_els[0], cation_els[0], structure[x_idx[0]].species_string
 
     # Shorter mean nearest-X distance → B-site
-    avg_dist: Dict[str, float] = {}
+    avg_dist: dict[str, float] = {}
     for el in cation_els:
         el_coords = np.array([structure[i].coords for i in cat_idx
                                if structure[i].species_string == el])
@@ -2045,7 +2043,7 @@ def _site_roles(structure: Any) -> tuple:
     a_el = next(el for el in cation_els if el != b_el)
     x_el = structure[x_idx[0]].species_string
 
-    role_map: Dict[int, str] = {}
+    role_map: dict[int, str] = {}
     for i in x_idx:
         role_map[i] = 'X'
     for i in cat_idx:
@@ -2095,12 +2093,12 @@ def plot_crystal_structure_interactive(
     # Use pymatgen periodic neighbor search so atoms at cell boundaries are correct
     all_neighbors = structure.get_all_neighbors(r=bx_cutoff)
 
-    poly_vx: List[float] = []
-    poly_vy: List[float] = []
-    poly_vz: List[float] = []
-    poly_fi: List[int] = []
-    poly_fj: List[int] = []
-    poly_fk: List[int] = []
+    poly_vx: list[float] = []
+    poly_vy: list[float] = []
+    poly_vz: list[float] = []
+    poly_fi: list[int] = []
+    poly_fj: list[int] = []
+    poly_fk: list[int] = []
     vertex_offset = 0
 
     for bi in b_indices:
@@ -2127,7 +2125,7 @@ def plot_crystal_structure_interactive(
         except Exception:
             pass
 
-    traces: List[Any] = []
+    traces: list[Any] = []
 
     b_color = _ELEMENT_COLORS.get(b_el, _DEFAULT_COLOR)
     if poly_vx:
@@ -2187,9 +2185,9 @@ def plot_crystal_structure_interactive(
         (3, 5), (3, 6),
         (4, 7), (5, 7), (6, 7),
     ]
-    ex: List[Optional[float]] = []
-    ey: List[Optional[float]] = []
-    ez: List[Optional[float]] = []
+    ex: list[float | None] = []
+    ey: list[float | None] = []
+    ez: list[float | None] = []
     for e0, e1 in edges:
         ex += [float(corners[e0][0]), float(corners[e1][0]), None]
         ey += [float(corners[e0][1]), float(corners[e1][1]), None]

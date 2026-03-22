@@ -1,3 +1,3 @@
 ,target,reactants,reaction_energy(eV/atom),inverse_hull_energy(eV/atom),reaction,competing phases
-0,BaUSe3,"['USe', 'BaSe2']",-0.30184914235714033,-0.05078818585714284,USe + BaSe2 -> BaUSe3,"[['U2Se3', 'BaSe'], ['Ba4USe6', 'U2Se3'], ['BaU2Se5', 'Ba4USe6'], ['USe3', 'Ba4USe6']]"
-1,BaUSe3,"['Ba4USe6', 'BaU2Se5']",-0.00020000000002511363,-0.00020000000002440288,0.1429 Ba4USe6 + 0.4286 BaU2Se5 -> BaUSe3,[]
+0,BaUSe3,"['USe', 'BaSe2']",-0.30184914235714466,-0.05078818585714018,USe + BaSe2 -> BaUSe3,"[['U2Se3', 'BaSe'], ['Ba4USe6', 'U2Se3'], ['BaU2Se5', 'Ba4USe6'], ['USe3', 'Ba4USe6']]"
+1,BaUSe3,"['Ba4USe6', 'BaU2Se5']",-0.0002000000000180081,-0.0002000000000190738,0.1429 Ba4USe6 + 0.4286 BaU2Se5 -> BaUSe3,[]

@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 import typer
 from loguru import logger
@@ -242,7 +241,7 @@ def create_dataset(input_path: Path = RAW_DATA_DIR / "shuffled_dataset_chalcogen
 def train_test_split_(ratio_splitting: float = 0.8, 
                      input_path: Path = PROCESSED_DATA_DIR / "chpvk_dataset.csv",
                      output_train_path: Path = PROCESSED_DATA_DIR / "chpvk_train_dataset.csv",
-                     output_test_path: Path = PROCESSED_DATA_DIR / "chpvk_test_dataset.csv") -> Tuple[pd.DataFrame, pd.DataFrame]:
+                     output_test_path: Path = PROCESSED_DATA_DIR / "chpvk_test_dataset.csv") -> tuple[pd.DataFrame, pd.DataFrame]:
     """Split the processed dataset into stratified train and test sets.
 
     Performs an 80/20 train/test split stratified by anion radius (rX) to ensure

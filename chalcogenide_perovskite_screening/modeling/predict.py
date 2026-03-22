@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import List, Tuple
 
 import typer
 from loguru import logger
@@ -25,7 +24,7 @@ def main():
 def check_stable_compositions(t: str, 
                               valid_new_compositions_data_path: Path = PROCESSED_DATA_DIR / "valid_new_compositions.csv",
                               tolerance_factor_dict_path: Path = INTERIM_DATA_DIR / "tolerance_factors.pkl",
-                              output_path: Path = PROCESSED_DATA_DIR / "stable_compositions.csv") -> Tuple[List[str], pd.DataFrame]:
+                              output_path: Path = PROCESSED_DATA_DIR / "stable_compositions.csv") -> tuple[list[str], pd.DataFrame]:
     """Filter compositions by tolerance factor threshold to predict stable perovskites.
 
     Applies the learned tolerance factor threshold to screen generated

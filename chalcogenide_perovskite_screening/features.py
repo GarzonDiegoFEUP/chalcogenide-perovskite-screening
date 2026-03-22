@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 import typer
 from loguru import logger
@@ -159,7 +159,7 @@ def createInputs(df: pd.DataFrame,
     return inputs
 
 
-def choose_primary_features(df: pd.DataFrame, change_columns: Dict[str, str], number_of_cycles: int = 15,
+def choose_primary_features(df: pd.DataFrame, change_columns: dict[str, str], number_of_cycles: int = 15,
                             cols_path: Path = RAW_DATA_DIR / "cols.csv") -> None:
     """Select top primary features using Random Forest importance ranking.
 
@@ -292,7 +292,7 @@ def create_features_SISSO(df_units: pd.DataFrame, inputs: Any,
     feature_df.to_csv(output_path)
 
 
-def perform_pca(df: pd.DataFrame, variables: List[str], target: List[str]) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, Any]:
+def perform_pca(df: pd.DataFrame, variables: list[str], target: list[str]) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, Any]:
     """Perform Principal Component Analysis on selected variables.
 
     Standardizes the input features and performs PCA to extract principal

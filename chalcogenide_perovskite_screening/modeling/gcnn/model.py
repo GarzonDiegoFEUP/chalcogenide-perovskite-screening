@@ -5,7 +5,6 @@ Created on Mon Sep  7 17:49:26 2020
 @author: user
 """
 
-from __future__ import print_function, division
 
 import torch
 import torch.nn as nn
