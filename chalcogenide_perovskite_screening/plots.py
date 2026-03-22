@@ -2227,5 +2227,79 @@ def plot_crystal_structure_interactive(
     return fig
 
 
+def plot_energy_relaxation_interactive(df: pd.DataFrame) -> Any:
+    """Create interactive scatter plot comparing initial and relaxed energies per atom.
+
+    Interactive Plotly version of the energy relaxation scatter plot from
+    notebook 2_1_StructureRelaxation. Points are coloured by energy reduction
+    per atom (Initial − Relaxed); a diagonal reference line marks the no-change
+    baseline.
+
+    Args:
+        df: DataFrame with columns 'Compound', 'Initial Energy/Atom (eV/atom)',
+            'Relaxed Energy/Atom (eV/atom)', and 'Energy Reduction/Atom (eV/atom)'.
+
+    Returns:
+        plotly.graph_objects.Figure: Interactive energy relaxation scatter figure.
+    """
+    import plotly.graph_objects as go
+
+    x = df['Initial Energy/Atom (eV/atom)']
+    y = df['Relaxed Energy/Atom (eV/atom)']
+    c = df['Energy Reduction/Atom (eV/atom)']
+
+    def _hover(row):
+        return (
+            f"<b>{row['Compound']}</b><br>"
+            f"Initial = {row['Initial Energy/Atom (eV/atom)']:.4f} eV/atom<br>"
+            f"Relaxed = {row['Relaxed Energy/Atom (eV/atom)']:.4f} eV/atom<br>"
+            f"ΔE = {row['Energy Reduction/Atom (eV/atom)']:.4f} eV/atom"
+        )
+
+    fig = go.Figure()
+
+    # Scatter: coloured by energy reduction per atom
+    fig.add_trace(go.Scatter(
+        x=x,
+        y=y,
+        mode='markers',
+        marker=dict(
+            color=c,
+            colorscale='RdYlGn',
+            reversescale=True,
+            size=9,
+            line=dict(color='black', width=0.5),
+            colorbar=dict(title='ΔE (eV/atom)'),
+            showscale=True,
+        ),
+        hovertext=[_hover(row) for _, row in df.iterrows()],
+        hoverinfo='text',
+        showlegend=False,
+    ))
+
+    # Diagonal reference line (y = x)
+    lim = [min(x.min(), y.min()), max(x.max(), y.max())]
+    fig.add_trace(go.Scatter(
+        x=lim,
+        y=lim,
+        mode='lines',
+        line=dict(color='black', dash='dash', width=1.5),
+        opacity=0.5,
+        name='No change',
+        hoverinfo='skip',
+    ))
+
+    fig.update_layout(
+        title='Structure Relaxation Energy Analysis',
+        xaxis=dict(title='Initial Energy (eV/atom)'),
+        yaxis=dict(title='Relaxed Energy (eV/atom)'),
+        template='plotly_white',
+        height=560,
+        legend=dict(x=0.01, y=0.99, bgcolor='rgba(255,255,255,0.7)'),
+        margin=dict(l=60, r=10, t=50, b=60),
+    )
+    return fig
+
+
 if __name__ == "__main__":
     app()

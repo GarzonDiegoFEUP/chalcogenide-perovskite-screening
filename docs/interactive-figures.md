@@ -188,6 +188,25 @@ Select a compound from the dropdown to load its structure:
 
 ---
 
+## Figure S3 — Structure relaxation: initial vs. relaxed energy
+
+Scatter plot comparing the initial (CrystaLLM-generated) and UMA-relaxed energy
+per atom for each ABX₃ candidate. Points are coloured by the energy reduction
+ΔE = E<sub>init</sub> − E<sub>relax</sub> per atom (green = small change,
+red = large reduction). The dashed diagonal line marks the no-change baseline
+(E<sub>relax</sub> = E<sub>init</sub>). Hover to see the compound name and
+exact energy values.
+
+<iframe
+  src="../assets/figures/energy_relaxation_scatter.html"
+  width="100%"
+  height="560px"
+  frameborder="0"
+  scrolling="no">
+</iframe>
+
+---
+
 ## Figure 5 — CrabNet-estimated bandgaps (element matrix)
 
 Element–element matrix for AB**S**₃ and AB**Se**₃ compositions. Color encodes
@@ -306,7 +325,7 @@ Pareto-optimal materials; squares indicate tandem-optimal materials.
 
 ---
 
-## Figure S4 — Spearman rank correlation matrix
+## Figure S9 — Spearman rank correlation matrix
 
 Pairwise Spearman rank correlations (ρ) between the four screening metrics for
 the *CrystaLLM*-predicted candidate set (n = 54). All |ρ| ≤ 0.27, confirming

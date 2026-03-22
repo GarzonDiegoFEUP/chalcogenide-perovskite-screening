@@ -20,7 +20,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from chalcogenide_perovskite_screening.config import PROCESSED_DATA_DIR, RESULTS_DIR
+from chalcogenide_perovskite_screening.config import PROCESSED_DATA_DIR, RESULTS_DIR, CRYSTALLM_DATA_DIR
 from chalcogenide_perovskite_screening.plots import (
     colormap_radii_interactive,
     plot_matrix_interactive,
@@ -31,6 +31,7 @@ from chalcogenide_perovskite_screening.plots import (
     plot_t_star_histogram_interactive,
     plot_t_star_vs_p_t_sisso_interactive,
     plot_crystal_structure_interactive,
+    plot_energy_relaxation_interactive,
 )
 
 OUTPUT_DIR = (Path(__file__).parent / "assets" / "figures").resolve()
@@ -194,9 +195,17 @@ fig_t = pareto_front_interactive(
 _save(fig_t, "pareto_CLS_tandem.html")
 
 # ---------------------------------------------------------------------------
-# 5. Figure S4 — correlation matrix
+# Figure S3 — energy relaxation scatter
 # ---------------------------------------------------------------------------
-print("\n[Fig S4] Spearman correlation matrix …")
+print("\n[Fig S3] Energy relaxation scatter …")
+df_relax = pd.read_csv(CRYSTALLM_DATA_DIR / "structure_relaxation_results.csv")
+fig = plot_energy_relaxation_interactive(df_relax)
+_save(fig, "energy_relaxation_scatter.html")
+
+# ---------------------------------------------------------------------------
+# 5. Figure S9 — correlation matrix
+# ---------------------------------------------------------------------------
+print("\n[Fig S9] Spearman correlation matrix …")
 metrics = ["bandgap", "t_sisso", "SR", "CL score"]
 dict_labels = {
     "bandgap": "Eₘ (eV)",
